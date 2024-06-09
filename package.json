@@ -1,0 +1,24 @@
+{
+  "name": "2024s-solo-play-fic0027",
+  "version": "1.0.0",
+  "description": "### Instructions",
+  "main": "index.js",
+  "scripts": {
+    "install:be": "cd be && npm install",
+    "install:fe": "cd fe/soloplay && npm install",
+    "install:main": "npm install",
+    "setup": "npm run install:be && npm run install:fe",
+    "import:data": "cd be && node scripts/importData.js",
+    "prisma-migration": "cd be &&npx prisma migrate dev --name deploy",
+    "start:fe": "cd fe/soloplay && npm start",
+    "start:be": "cd be && npm start",
+    "start-project": "concurrently \"npm run start:be\" \"npm run start:fe\"",
+    "deploy": "npm run install:main && npm run setup && npm run prisma-migration && npm run import:data && npm run start-project"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

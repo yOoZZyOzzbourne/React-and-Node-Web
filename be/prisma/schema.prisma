@@ -1,0 +1,30 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Developer {
+  id    Int     @id @default(autoincrement())
+  name  String
+  games Game[]
+  icon  String? @default("https://t4.ftcdn.net/jpg/02/51/95/53/360_F_251955356_FAQH0U1y1TZw3ZcdPGybwUkH90a3VAhb.jpg")
+}
+
+model Game {
+  id          Int       @id @default(autoincrement())
+  name        String
+  icon        String    @default("https://t4.ftcdn.net/jpg/02/51/95/53/360_F_251955356_FAQH0U1y1TZw3ZcdPGybwUkH90a3VAhb.jpg")
+  description String
+  pictures    String    @default("")
+  userImages  String    @default("") // New field for user-uploaded images
+  video       String?
+  developerId Int
+  developer   Developer @relation(fields: [developerId], references: [id], onDelete: Cascade)
+}
